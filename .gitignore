@@ -1,0 +1,10 @@
+# Runtime / machine-local state (may contain usernames, SIDs, paths)
+state/*
+!state/.gitkeep
+
+# Logs and local leftovers
+*.log
+*.tmp
+Thumbs.db
+Desktop.ini
+.DS_Store
