@@ -8,7 +8,7 @@
 
 - 一键安装：清理 ACL 残留 → 创建硬链接 → 注册 IFEO
 - 日常只需正常打开 `IDMan.exe`（无需每次管理员权限）
-- 托盘右键增加 `reset`，重置本包试用计数
+- 两种重置方式：启动时自动重置，或托盘手动 `reset`
 - 自动关闭试用/注册类弹窗；完整性告警窗会保留，便于排查
 
 ## 环境要求
@@ -59,10 +59,19 @@ SELFTEST.cmd
 | 操作 | 方法 |
 |------|------|
 | 启动 | 打开 `IDMan.exe` |
-| 重置 | 托盘图标右键 → `reset` |
 | ACL 扫描 | `scripts\scan_clsid_acl.cmd`（干净=`0`，仍有锁=`2`） |
 | 自检 | `SELFTEST.cmd` |
 | 卸载 | `UNINSTALL.cmd` |
+
+## 重置方式
+
+有两种，可任选其一：
+
+1. **手动重置**  
+   托盘图标右键 → 选择 `reset`。
+
+2. **自动重置（默认）**  
+   每次启动 `IDMan.exe` 时，IFEO 会先跑一段预启动脚本并把试用计数归零。启动瞬间可能会闪一下**黑色 cmd 窗口**，属正常现象，窗口会很快消失。
 
 ## 卸载
 
@@ -101,7 +110,10 @@ IDM_TrialLab_Portable/
 本包必须与 `IDMan.exe` 同级，不要只复制子目录。
 
 **托盘没有 `reset`？**  
-确认 `IdmTrayMenu.exe` 在运行，或执行 `SELFTEST.cmd`；也可查看 `state\silent_reset.log`。
+确认 `IdmTrayMenu.exe` 在运行，或执行 `SELFTEST.cmd`；也可查看 `state\silent_reset.log`。即使没有托盘菜单，每次启动也会自动重置。
+
+**启动时闪黑窗？**  
+正常。那是 IFEO 预启动脚本在做自动重置，一般会很快关掉。
 
 **每次都要管理员运行吗？**  
 不用。仅安装 / 卸载需要 UAC。
